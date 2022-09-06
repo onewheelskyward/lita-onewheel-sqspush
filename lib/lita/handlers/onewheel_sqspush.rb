@@ -7,7 +7,7 @@ module Lita
       config :api_key
       config :api_secret
 
-      route /weirdai\s+(.*)$/i, :handle_weirdai
+      route /t1a5\s+(.*)$/i, :handle_weirdai
 
       def message_sent?(sqs_client, queue_url, message_body)
         sqs_client.send_message(

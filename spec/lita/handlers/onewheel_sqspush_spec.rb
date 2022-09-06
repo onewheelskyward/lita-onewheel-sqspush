@@ -8,7 +8,7 @@ end
 describe Lita::Handlers::OnewheelSqspush, lita_handler: true do
   it 'cocks about' do
     # mock_up 'fil'
-    send_command 'weirdai test'
+    send_command 't1a5 test'
     expect(replies.last).to include('test')
   end
 end
