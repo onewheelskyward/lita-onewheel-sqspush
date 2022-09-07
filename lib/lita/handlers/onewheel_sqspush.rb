@@ -25,13 +25,19 @@ module Lita
         region = 'us-west-2'
         queue_name = 'cats-on-the-moon'
         message_body = response.matches[0][0]
-        sts_client = Aws::STS::Client.new(region: region)
+
+        Aws.config.update(
+          region: region,
+          credentials: Aws::Credentials.new(config.api_key, config.api_secret)
+        )
+
+        sts_client = Aws::STS::Client.new
 
         # For example:
         # 'https://sqs.us-east-1.amazonaws.com/111111111111/my-queue'
         queue_url = "https://sqs.#{region}.amazonaws.com/#{sts_client.get_caller_identity.account}/#{queue_name}"
 
-        sqs_client = Aws::SQS::Client.new(region: region)
+        sqs_client = Aws::SQS::Client.new
 
         Lita.logger.info "Sending a message to the queue named '#{queue_name}'..."
 
